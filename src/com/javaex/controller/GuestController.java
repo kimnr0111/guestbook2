@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.GuestDao;
-import com.javaex.util.GuestUtil;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestVo;
 
 @WebServlet("/gbc")
@@ -30,7 +30,7 @@ public class GuestController extends HttpServlet {
 			
 			request.setAttribute("guestList", gList);
 			
-			GuestUtil.forward(request, response, "/WEB-INF/addList.jsp");
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
 		} else if("add".equals(action)) { //등록
 			System.out.println("add");
 			
@@ -40,7 +40,7 @@ public class GuestController extends HttpServlet {
 			GuestVo guestVo = new GuestVo(name, password, content);
 			guestDao.contentsInsert(guestVo);
 			
-			GuestUtil.redirect(request, response, "http://localhost:8088/gb2/gbc?action=list");
+			WebUtil.redirect(request, response, "http://localhost:8088/gb2/gbc?action=list");
 		} else if("delete".equals(action)) { //삭제
 			System.out.println("delete");
 			
@@ -50,11 +50,11 @@ public class GuestController extends HttpServlet {
 			GuestVo guestVo = new GuestVo(no, password);
 			guestDao.guestDelete(guestVo);
 			
-			GuestUtil.redirect(request, response, "http://localhost:8088/gb2/gbc?action=list");
+			WebUtil.redirect(request, response, "http://localhost:8088/gb2/gbc?action=list");
 		} else if("dform".equals(action)) { //삭제폼
 			System.out.println("dform");
 			
-			GuestUtil.forward(request, response, "/WEB-INF/deleteForm.jsp");
+			WebUtil.forward(request, response, "/WEB-INF/deleteForm.jsp");
 			
 		}
 
